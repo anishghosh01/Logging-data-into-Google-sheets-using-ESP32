@@ -1,0 +1,17 @@
+function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var now = new Date();
+
+  // Extract voltage parameters from the request
+  var voltage1 = e.parameter.voltage1 || "";
+  var voltage2 = e.parameter.voltage2 || "";
+  var voltage3 = e.parameter.voltage3 || "";
+
+  // Format the timestamp (optional: adjust to Indian timezone)
+  var formattedTime = Utilities.formatDate(now, "Asia/Kolkata", "yyyy-MM-dd HH:mm:ss");
+
+  // Append data to the sheet
+  sheet.appendRow([formattedTime, voltage1, voltage2, voltage3]);
+
+  return ContentService.createTextOutput("Data logged successfully");
+}
